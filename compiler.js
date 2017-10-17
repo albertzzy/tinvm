@@ -1,6 +1,6 @@
 const zReg = /z-(\w+)/;
 
-import Directive from './directive'; 
+import directives from './directives'; 
 
 
 function compileTemplate(nodes,model){
@@ -11,7 +11,6 @@ function compileTemplate(nodes,model){
             compileTemplate(n,model)
         })
     }
-
 }
 
 /* 
@@ -19,7 +18,7 @@ function compileTemplate(nodes,model){
     z-model
     z-if
     z-else
-    z-for
+    z-loop
 */
 function parseNode(node,model){
     let attrs = node.attributes || [];
@@ -29,7 +28,7 @@ function parseNode(node,model){
         let attrType = attrs[i].nodeName;
         
         if(zReg.test(attrType)){
-            let directiveType = zReg.exec(attrType)[1];
+            let directiveType = attrType.replace('-','');
             let expression = attrs[i].value;
             let scope = {
                 node,
@@ -37,7 +36,9 @@ function parseNode(node,model){
                 expression
             };
 
-            new Directive(directiveType,scope);
+            let Directive = directives[directiveType];
+
+            new Directive(scope);
         }
     }
 }
