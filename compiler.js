@@ -42,3 +42,5 @@ function parseNode(node,model){
         }
     }
 }
+
+export default compileTemplate;

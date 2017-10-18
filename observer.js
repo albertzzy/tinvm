@@ -3,7 +3,6 @@ import Dep from './depend';
 class Observer{
     constructor(obj){
         this.observe(obj);
-
     }
 
     observe(obj){
@@ -49,7 +48,7 @@ class Observer{
     }
 
     proxyArray(obj,prop,val){
-        let methods = ['push','pop','shift','reverse','unshift','splice'];
+        let methods = ['push','pop','shift','reverse','unshift','splice','sort'];
         let proto = Array.prototype;
         
         methods.forEach((m) => {

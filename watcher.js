@@ -10,7 +10,8 @@ class Watcher{
     }
 
     run(){
-        this.newValue = this.getValue();
+        let newValue = this.getValue();
+        let oldValue = this.oldValue;
 
         this.update(oldValue,newValue);
     }

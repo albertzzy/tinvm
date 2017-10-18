@@ -2,8 +2,6 @@ import Watcher from './watcher';
 
 class Directive{
     constructor(scope){
-        this.scope = scope;
-
         this.el = scope.node;
         this.expression = scope.expression;
         this.model = scope.model;
