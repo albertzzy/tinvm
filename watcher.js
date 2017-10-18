@@ -1,10 +1,12 @@
+import Depend from './depend';
+
 class Watcher{
     constructor(raw,model,update){
         this.raw = raw;
         this.model = model;
         this.update = update;
+        Depend.target = this;
         this.oldValue = this.getValue();
-
     }
 
     run(){
