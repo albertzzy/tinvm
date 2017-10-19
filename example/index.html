@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <style>
+            /* *{
+                margin:0;
+                padding:0;
+            } */
+            .img{
+                width:1px;
+                box-sizing:border-box;
+                border:1px solid #000;
+                height:100px;
+            }
+
+
+        </style>
+    </head>
+    <body>
+
+        <div class="img"></div>
+        <div id="app">
+            <p z-if="seen">a shown text</p>
+        </div>
+    </body>
+    <script src="http://localhost:8080/tinvm.js"></script>
+    <script>
+        // const Tinvm = require('../dist/tinvm.js');
+        // import Tinvm from '../dist/tinvm.js'
+
+        var obj = {
+            seen:false
+        }
+
+        new Tinvm({
+            el:'#app',
+            data:obj
+        })
+
+
+    </script>
+</html>
