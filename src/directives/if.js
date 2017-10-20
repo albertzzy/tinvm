@@ -6,8 +6,7 @@ export default class Zif extends Directive{
     }
 
     update(oldVal,newVal){
-        // console.log(oldVal,newVal);
-        // console.log(arguments);
+        
         this.el.style.display = !!newVal ? '' : 'none'; 
 
     }

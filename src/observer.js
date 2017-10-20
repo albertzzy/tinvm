@@ -12,17 +12,23 @@ class Observer{
             this.defineProperty(obj,prop,val);
             
             let type = Object.prototype.toString.call(val);
-            if(type === '[object Object]'){
-                this.observe(val);
-            }else if(type === '[object Array]'){
-                this.proxyArray(obj,prop,val);
+            if(prop !== '__ob__'){
+                if(type === '[object Object]'){
+                    this.observe(val);
+                }else if(type === '[object Array]'){
+                    
+                    this.proxyArray(obj,prop,val);
+                }
             }
-
         })
 
     }
 
     defineProperty(obj,prop,val){
+        if(prop === '__ob__'){
+            return;
+        }
+
         let dep = new Dep();
         let childDep;
         if(Object.prototype.toString.call(val) === '[object Array]'){
@@ -47,6 +53,7 @@ class Observer{
             set:function(value){
                 
                 if(val !== value){
+                    val = value;
                     dep.notify();
                 }
 

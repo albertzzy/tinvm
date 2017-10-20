@@ -12,7 +12,6 @@ class Directive{
     init(){
         let watcher = new Watcher(this.expression,this.model,this.update.bind(this));
 
-        console.log(watcher);
         this.update(watcher.value);
     }
     
