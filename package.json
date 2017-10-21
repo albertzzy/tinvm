@@ -4,6 +4,8 @@
   "description": "tinymvvm",
   "main": "index.js",
   "scripts": {
+    "init":"flow init",
+    "check":"flow check",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "start": "webpack-dev-server --hot --inline --content-base example/"

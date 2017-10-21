@@ -19,7 +19,7 @@
 
         <!-- <div class="img"></div> -->
         <div id="app">
-            <p z-if="seen">a shown text</p>
+            <p z-if="show.seen">a shown text</p>
         </div>
     </body>
     <script src="http://localhost:8080/tinvm.js"></script>
@@ -28,7 +28,10 @@
         // import Tinvm from '../dist/tinvm.js'
 
         var obj = {
-            seen:false
+            show:{
+                seen:true
+            },
+            // seen:false
         }
 
         new Tinvm({
