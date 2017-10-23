@@ -6,9 +6,15 @@ export default class Zmodel extends Directive{
     }
 
     update(val){
-
+        
     }
 
+    bind(){
+        this.el.addEventListener('input',(e) => {
+            let val = e.target.value;
+            this.value = val;
+        })
 
+    }
 
 }

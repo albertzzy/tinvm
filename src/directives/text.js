@@ -5,8 +5,12 @@ export default class Ztext extends Directive{
         super(...args);
     }
 
-    update(val){
-        this.el.textContent = val;
+    update(oldVal,newVal){
+        if(typeof newVal === 'undefined'){
+            newVal = oldVal;
+        }
+
+        this.el.textContent = newVal;
 
     }
 

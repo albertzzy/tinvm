@@ -23,12 +23,31 @@ function parseNode(node,model){
 
         if(zReg.test(attrType)){
             let directiveType = attrType.replace('-','');
-            let expression = attrs[i].value;
+            let expression,arg;
+
+            console.log(directiveType);
+
+            expression = attrs[i].value;
+
+            if(directiveType === 'zfor'){
+                let matchArr = expression.match(/(\w+)\s+in\s+(\w+)/);
+
+                if(matchArr.length){
+                    expression = matchArr[2];
+                    arg = matchArr[1];
+                }
+            }
+            
+
+
+
             let scope = {
                 node,
                 model,
-                expression
+                expression,
+                arg
             };
+            
             let Directive = directives[directiveType];
 
             new Directive(scope);

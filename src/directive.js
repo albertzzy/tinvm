@@ -5,7 +5,8 @@ class Directive{
         this.el = scope.node;
         this.expression = scope.expression;
         this.model = scope.model;
-
+        this.arg = scope.arg;
+        
         this.init();
     }
 

@@ -9,11 +9,8 @@ export default class Zif extends Directive{
         if(typeof newVal === 'undefined'){
             newVal = oldVal;
         }
-
-        console.log(oldVal,newVal);
-        // if(oldVal !== newVal){
-            this.el.style.display = !!newVal ? '' : 'none'; 
-        // }
+       
+        this.el.style.display = !!newVal ? '' : 'none'; 
 
     }
 

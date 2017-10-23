@@ -20,7 +20,16 @@
         <!-- <div class="img"></div> -->
         <div id="app">
             <p z-if="show.seen">a shown text</p>
+            <ul>
+                <li z-for="item in list" key="item.value">
+                    <span>{{item.name}}<i>{{item.value}}</i></span>
+                </li>
+            </ul>
+
+            <span></span>
+
         </div>
+
     </body>
     <script src="http://localhost:8080/tinvm.js"></script>
     <script>
@@ -29,8 +38,21 @@
 
         var obj = {
             show:{
-                seen:true
+                seen:true,
             },
+            list:[{
+                name:"li1",
+                value:"li1-val"
+            },{
+                name:"li2",
+                value:"li2-val"
+            },{
+                name:"li3",
+                value:"li3-val"
+            },{
+                name:"li4",
+                value:"li4-val"
+            }]
             // seen:false
         }
 

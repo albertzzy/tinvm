@@ -13,13 +13,12 @@ class Watcher{
         let newValue = this.getValue();
         let oldValue = this.value;
 
-        console.log('===watch run==');
-        console.log(oldValue,newValue);
-        console.log('===watch run==');
+        // console.log('===watch run==');
+        // console.log(oldValue,newValue);
+        // console.log('===watch run==');
 
-        if(oldValue !== newValue){
-            this.update(oldValue,newValue);
-        }
+        this.update(oldValue,newValue);
+        this.value = newValue;
     }
 
     getValue(){
@@ -27,9 +26,9 @@ class Watcher{
         let func = new Function('model','raw','return model.'+this.raw);
 
         let val = func(this.model);
-        console.log('===getval==');
+        /* console.log('===getval==');
         console.log(val);
-        console.log('====getval==');
+        console.log('====getval=='); */
         
         return val;
     }
