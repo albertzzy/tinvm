@@ -30,7 +30,6 @@ class Watcher{
         let val = func(this.model);
         console.log('===getval==');
         console.log(val);
-        console.log(this.model);
         console.log('====getval==');
         
         return val;
