@@ -3,73 +3,73 @@ import Directive from '../directive'
     to do
     解析属性
 */
+
+const REG = /\{\{\s*([\w\.\+\-\*\/\s]+)\s*\}\}/;
+
 export default class Zfor extends Directive{
     constructor(...args){
         super(...args);
+
     }
 
     update(oldVal,newVal){
         if(typeof newVal === 'undefined'){
             newVal = oldVal;
         }
+        
+        // console.log(oldVal,newVal);
 
         let parentNode = this.el.parentNode;
-        let nodeName = this.el.nodeName;
+        let node = this.el;
         let fragment = document.createDocumentFragment();
-        let attrs = this.el.attributes;
 
-        newVal.length && newVal.forEach((ele,index) => {
-            let itemElement = document.createElement(nodeName.toLowerCase());
-            this.copyAttributes(itemElement,attrs);
-            this.copyChildren(itemElement,this.el,ele);
-            fragment.appendChild(itemElement);
-        }) 
+        // parentNode.removeChild(node);
+        // parentNode.innerHTML = '';
 
-        parentNode.appendChild(fragment);
+        /* what fuck */
+        setTimeout(()=>{
 
-    }
-
-    copyAttributes(element,attrs){
-        [...attrs].forEach( (attr) => {
-            if(attr.name.indexOf('z-')===-1){
-                element.setAttribute(attr.name,attr.value);
-            }
+            newVal.length && newVal.forEach((item,index) => {
+                let itemElement = node.cloneNode(true);
+                this.copyChildren(itemElement,item);
+                fragment.appendChild(itemElement);
+            }) 
+            
+            parentNode.appendChild(fragment);
         })
 
     }
 
-    copyChildren(element,el,item){
 
-        let children = el.cloneNode(true);
-        children = this.parseText(children,item);
+    copyChildren(element,item){
 
-        element.appendChild(children);
-
+        this.parseText(element,item);
     }
 
-    parseText(node,item){
-        let children = node.innerHTML;
+    parseText(element,item){
+
+        let children = element.childNodes;
+        let parentNode = element;
+
+        for(let i=0;children.length && i<children.length;i++){
+            if(children[i].splitText){
+                let text = children[i].nodeValue;
         
-
-
-        /* while(node.childNodes.length>=1){
-            let text = node.textContent;
-
-
-            if(text && /\{\{([\w\.]+)\}\}/.test(text)){
-                let expr = text.match(/\{\{([\w\.]+)\}\}/)[1];
-                let val = this.getValue(expr,item)
-
-                
+                if(REG.test(text)){
+                    let expr = text.match(REG)[1];
+                    let val = this.getValue(expr,item);
+                    text = text.replace(REG,val);
+                    children[i].nodeValue = text;
+                }
+            }else{
+                this.parseText(children[i],item);
             }
-            
-        } */
-        return node;
-        
+        }
+       
     }
 
     getValue(expr,item){
-        let func = new Function('model','return model.'+expr);
+        let func = new Function('item','return '+expr);
         let val = func(item);
 
         return val;

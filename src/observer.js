@@ -17,7 +17,7 @@ class Observer{
                     this.observe(val);
                 }else if(type === '[object Array]'){
                     
-                    this.proxyArray(obj,prop,val);
+                    this.proxyArray(val);
                 }
             }
         })
@@ -63,19 +63,31 @@ class Observer{
 
     }
 
-    proxyArray(obj,prop,val){
+    proxyArray(val){
         let methods = ['push','pop','shift','reverse','unshift','splice','sort'];
         let proto = Array.prototype;
-        
+        let newProto = Object.create(proto);
+
+
         methods.forEach((m) => {
-            val[m] = () => {
-                let dp = val.__ob__;
-                if(dp){
-                    dp.notify();
-                }
-                proto[m].call(obj[prop],arguments);
-            }
+            Object.defineProperty(newProto,m,{
+                value:function(){
+                    let dp = val.__ob__;
+                    if(dp){
+                        dp.notify();
+                    }
+               
+                    let res = proto[m].apply(val,arguments);
+                    return res;
+                },
+                enumerable: false,
+                configurable: true,
+                writable: true
+            })
+
         })
+
+        val.__proto__ = newProto;
         
     }
 
