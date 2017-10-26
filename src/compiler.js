@@ -16,7 +16,7 @@ function compileTemplate(nodes,model){
 
 function parseNode(node,model){
     let attrs = node.attributes || [];
-
+    let parent = node.parentNode;
 
     for(let i=0; i<attrs.length; i++){
         let attrType = attrs[i].nodeName;
@@ -24,8 +24,6 @@ function parseNode(node,model){
         if(zReg.test(attrType)){
             let directiveType = attrType.replace('-','');
             let expression,arg;
-
-            console.log(directiveType);
 
             expression = attrs[i].value;
 
@@ -38,10 +36,8 @@ function parseNode(node,model){
                 }
             }
             
-
-
-
             let scope = {
+                parent,
                 node,
                 model,
                 expression,

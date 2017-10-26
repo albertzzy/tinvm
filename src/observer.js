@@ -36,11 +36,18 @@ class Observer{
             val.__ob__ = childDep;
         }
             
-
+        /* dep 被闭包引用 */
         Object.defineProperty(obj,prop,{
             get:function(){ 
                 let target = Dep.target;
+                // console.log(target);
+                // console.log('---get---');
+                // console.log(val);
+                // debugger;
+                
+
                 if(target){
+                    // console.log('have target',target);
                     dep.add(target)
 
                     if(childDep){
@@ -51,7 +58,6 @@ class Observer{
                 return val;
             },
             set:function(value){
-                
                 if(val !== value){
                     val = value;
                     dep.notify();

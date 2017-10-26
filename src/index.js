@@ -7,7 +7,10 @@ export default class Tinvm{
         let {el,data} = arg;
 
         // this.initModel(data || {});
+
+        /* 交换位置则有问题 */
         new Observe(data);
+
         compiler(document.querySelector(el),data);
     }
 

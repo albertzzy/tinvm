@@ -10,6 +10,8 @@ export default class Depend{
     }
 
     notify(){
+
+        // console.log(this.watchers);
         this.watchers.forEach(w => {
             w.run();
         })

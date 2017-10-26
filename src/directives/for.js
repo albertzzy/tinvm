@@ -1,15 +1,17 @@
 import Directive from '../directive'
 /* 
-    to do
+    todo
     解析属性
 */
 
 const REG = /\{\{\s*([\w\.\+\-\*\/\s]+)\s*\}\}/;
-
+/* 
+    careful 
+    类的对象引用了dom对象，dom对象删除还是会在内存中
+*/
 export default class Zfor extends Directive{
     constructor(...args){
         super(...args);
-
     }
 
     update(oldVal,newVal){
@@ -17,25 +19,25 @@ export default class Zfor extends Directive{
             newVal = oldVal;
         }
         
-        // console.log(oldVal,newVal);
-
-        let parentNode = this.el.parentNode;
-        let node = this.el;
         let fragment = document.createDocumentFragment();
 
-        // parentNode.removeChild(node);
-        // parentNode.innerHTML = '';
-
+        // need to be optimized-dirty now
+        let children = this.parent.childNodes;
+        for(let i=children.length-1;children.length && i>=0;i--){
+            this.parent.removeChild(children[i]);
+        }
+        
         /* what fuck */
         setTimeout(()=>{
-
             newVal.length && newVal.forEach((item,index) => {
-                let itemElement = node.cloneNode(true);
+                let itemElement = this.el.cloneNode(true);
                 this.copyChildren(itemElement,item);
                 fragment.appendChild(itemElement);
             }) 
             
-            parentNode.appendChild(fragment);
+            this.parent.appendChild(fragment);
+
+            fragment = null;
         })
 
     }

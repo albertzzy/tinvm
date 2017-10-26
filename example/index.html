@@ -20,14 +20,16 @@
         <!-- <div class="img"></div> -->
         <div id="app">
             <p z-if="show.seen">a shown text</p>
+            <p z-if="show.seen">ajdajsdfkajs fd</p>
+            <p z-if="show.seen">ajdajsdfkajs fd</p>
             <ul>
                 <li z-for="item in list" key="item.value">
                     <span>{{item.name}}<i>{{item.value}}</i></span>
                 </li>
             </ul>
 
-            <span></span>
-
+            <span z-text="text"></span>
+            
         </div>
 
     </body>
@@ -40,6 +42,7 @@
             show:{
                 seen:true,
             },
+            text:'demo txt',
             list:[{
                 name:"li1",
                 value:"li1-val"
