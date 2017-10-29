@@ -40,14 +40,8 @@ class Observer{
         Object.defineProperty(obj,prop,{
             get:function(){ 
                 let target = Dep.target;
-                // console.log(target);
-                // console.log('---get---');
-                // console.log(val);
-                // debugger;
-                
 
                 if(target){
-                    // console.log('have target',target);
                     dep.add(target)
 
                     if(childDep){

@@ -12,8 +12,11 @@ export default class Ztext extends Directive{
 
         this.el.textContent = newVal;
 
+        if(this.el.nodeName === 'INPUT'
+        || this.el.nodeName === 'TEXTAREA'){
+            this.el.value = newVal;
+        }
+
     }
-
-
 
 }

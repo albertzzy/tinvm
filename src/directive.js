@@ -15,6 +15,8 @@ class Directive{
         let watcher = new Watcher(this.expression,this.model,this.update.bind(this));
 
         this.update(watcher.value);
+
+        this.bind && this.bind();
     }
     
 
